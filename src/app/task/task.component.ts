@@ -8,7 +8,7 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
   styleUrls: ['./task.component.css'],
 })
 export class TaskComponent implements OnInit {
-  @Input() task: Task = { description: 'teste', datetime: 'testes' };
+  @Input() task!: Task;
 
   faTrash = faTrash;
 

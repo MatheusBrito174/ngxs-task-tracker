@@ -9,21 +9,25 @@
     />
 
     <app-validation-error-msg
-      *ngIf="(
+      *ngIf="
+        (
           taskForm.get('description')?.touched ||
           taskForm.get('description')?.dirty
         ) &&
-        taskForm.get('description')?.errors?.['required']"
+        taskForm.get('description')?.errors?.['required']
+      "
       message="The field is required."
     >
     </app-validation-error-msg>
 
     <app-validation-error-msg
-      *ngIf="(
+      *ngIf="
+        (
           taskForm.get('description')?.touched ||
           taskForm.get('description')?.dirty
         ) &&
-        taskForm.get('description')?.errors?.['maxlength']"
+        taskForm.get('description')?.errors?.['maxlength']
+      "
       [message]="getMaxLengthErrorMessage('description')"
     >
     </app-validation-error-msg>
@@ -37,21 +41,25 @@
       placeholder="Date and Time"
     />
     <app-validation-error-msg
-      *ngIf="(
-      taskForm.get('datetime')?.touched ||
-      taskForm.get('datetime')?.dirty
-      ) &&
-      taskForm.get('datetime')?.errors?.['required']"
+      *ngIf="
+        (
+          taskForm.get('datetime')?.touched ||
+          taskForm.get('datetime')?.dirty
+        ) &&
+        taskForm.get('datetime')?.errors?.['required']
+      "
       message="The field is required."
     >
     </app-validation-error-msg>
 
     <app-validation-error-msg
-      *ngIf="(
-      taskForm.get('datetime')?.touched ||
-      taskForm.get('datetime')?.dirty
-      ) &&
-      taskForm.get('datetime')?.errors?.['minDate']"
+      *ngIf="
+        (
+          taskForm.get('datetime')?.touched ||
+          taskForm.get('datetime')?.dirty
+        ) &&
+        taskForm.get('datetime')?.errors?.['minDate']
+      "
       message="The field should be greater than the current date and time."
     >
     </app-validation-error-msg>

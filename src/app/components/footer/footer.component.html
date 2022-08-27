@@ -1,4 +1,13 @@
 <footer class="text-center">
-  <a class="link-info" routerLink="/about">About</a>
+  <a routerLink="/about" [hidden]="router.url === '/about'" class="link-info">
+    About
+  </a>
+  <a
+    [hidden]="router.url !== '/about'"
+    class="link-info pointer"
+    (click)="goBack()"
+  >
+    Back
+  </a>
   <p>Copyright &copy;. 2022</p>
 </footer>

@@ -1,6 +1,9 @@
 <nav class="navbar bg-primary">
   <div class="container-fluid">
-    <a class="navbar-brand text-light" routerLink="/">TaskTracker</a>
+    <a class="navbar-brand text-light" routerLink="/">
+      <fa-icon [icon]="faCalendarCheck"></fa-icon>
+      TaskTracker
+    </a>
     <button [hidden]="router.url !== '/home'" class="btn btn-success">
       Exibir Form
     </button>

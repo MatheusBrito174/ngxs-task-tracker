@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
+import { faCalendarCheck } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-header',
@@ -7,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
+  faCalendarCheck = faCalendarCheck;
+
   constructor(readonly router: Router) {}
 
   ngOnInit(): void {}

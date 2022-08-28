@@ -1,5 +1,8 @@
+import { environment } from './../environments/environment.prod';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { NgxsModule } from '@ngxs/store';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -11,6 +14,7 @@ import { PageLayoutModule } from './shared/modules/page-layout/page-layout.modul
 @NgModule({
   declarations: [AppComponent, AboutComponent],
   imports: [
+    NgxsModule.forRoot([], { developmentMode: !environment.production }),
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,

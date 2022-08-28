@@ -1,0 +1,12 @@
+<button
+  class="btn"
+  [class]="[
+    format ? 'btn-' + format : null,
+    size ? 'btn-' + size : null,
+    rounded ? 'rounded-circle' : null
+  ]"
+  (click)="onClick($event)"
+  [disabled]="disabled"
+>
+  <ng-content></ng-content>
+</button>

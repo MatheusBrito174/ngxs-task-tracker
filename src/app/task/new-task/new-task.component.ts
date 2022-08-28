@@ -16,6 +16,7 @@ export class NewTaskComponent implements OnInit {
     this.taskForm = this._formBuilder.group({
       description: ['', [Validators.required, Validators.maxLength(100)]],
       datetime: ['', [Validators.required, dateGreaterThanValidator]],
+      completed: [false],
     });
   }
 

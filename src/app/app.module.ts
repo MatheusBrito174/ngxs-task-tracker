@@ -10,6 +10,7 @@ import { AppComponent } from './app.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AboutComponent } from './about/about.component';
 import { PageLayoutModule } from './shared/modules/page-layout/page-layout.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, AboutComponent],
@@ -19,6 +20,7 @@ import { PageLayoutModule } from './shared/modules/page-layout/page-layout.modul
     AppRoutingModule,
     FontAwesomeModule,
     PageLayoutModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

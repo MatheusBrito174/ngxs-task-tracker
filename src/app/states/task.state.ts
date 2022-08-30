@@ -2,6 +2,7 @@ import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { TaskActions } from '../actions/task.actions';
+import { Tasks } from '../models/task';
 import { TaskStateModel } from '../models/task.state.model';
 import { TaskService } from '../services/task.service';
 
@@ -22,8 +23,21 @@ export class TaskState {
     return state.tasks;
   }
 
+  @Action(TaskActions.Add)
+  add(ctx: StateContext<TaskStateModel>, action: TaskActions.Add) {
+    const { task } = action;
+    const state = ctx.getState();
+    this.taskService
+      .addTask(task)
+      .subscribe((newTask) =>
+        ctx.patchState({ tasks: [...state.tasks, newTask] })
+      );
+  }
+
   @Action(TaskActions.FetchAll)
   fetchAll(ctx: StateContext<TaskStateModel>) {
-    this.taskService.fetchAllTasks().subscribe((r) => console.log(r));
+    this.taskService
+      .fetchAllTasks()
+      .subscribe((tasks) => ctx.setState({ tasks }));
   }
 }

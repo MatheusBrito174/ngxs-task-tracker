@@ -1,0 +1,5 @@
+<form [formGroup]="newTaskForm" (ngSubmit)="createNewTask($event)">
+  <app-new-task formControlName="newTask"></app-new-task>
+
+  <app-button format="success">Add Task</app-button>
+</form>

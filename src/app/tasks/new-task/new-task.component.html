@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm" (ngSubmit)="addTask()">
+<form [formGroup]="taskForm">
   <div class="form-group mb-3">
     <input
       type="text"
@@ -73,6 +73,4 @@
       formControlName="completed"
     ></app-checkbox>
   </div>
-
-  <app-button format="success">Add Task</app-button>
 </form>

@@ -6,6 +6,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { TaskComponent } from './task/task.component';
 import { NewTaskComponent } from './new-task/new-task.component';
+import { NewTaskViewComponent } from './new-task-view/new-task-view.component';
 import { TaskListComponent } from './task-list/task-list.component';
 import { CustomFormsModule } from '../shared/modules/custom-forms/custom-forms.module';
 import { GeneralModule } from '../shared/modules/general/general.module';
@@ -16,6 +17,7 @@ import { TaskListViewComponent } from './task-list-view/task-list-view.component
   declarations: [
     TaskComponent,
     NewTaskComponent,
+    NewTaskViewComponent,
     TaskListComponent,
     TaskListViewComponent,
   ],
@@ -29,6 +31,7 @@ import { TaskListViewComponent } from './task-list-view/task-list-view.component
   exports: [
     TaskComponent,
     NewTaskComponent,
+    NewTaskViewComponent,
     TaskListComponent,
     TaskListViewComponent,
   ],

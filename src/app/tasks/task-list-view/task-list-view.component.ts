@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { TaskState } from './../../states/task.state';
 import { Component, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
-import { Tasks } from 'src/app/models/task';
+import { Task, Tasks } from 'src/app/models/task';
 import { TaskActions } from 'src/app/actions/task.actions';
 
 @Component({
@@ -19,7 +19,16 @@ export class TaskListViewComponent implements OnInit {
     this.store.dispatch(new TaskActions.FetchAll());
   }
 
-  removeTask(taskId: string) {
-    this.store.dispatch(new TaskActions.Remove(taskId));
+  removeTask(task: Task): void {
+    this.store.dispatch(new TaskActions.Remove(task.id));
+  }
+
+  markTaskAsCompleted(task: Task): void {
+    const updatedTask = {
+      ...task,
+      completed: !task.completed,
+    };
+
+    this.store.dispatch(new TaskActions.Edit(updatedTask));
   }
 }

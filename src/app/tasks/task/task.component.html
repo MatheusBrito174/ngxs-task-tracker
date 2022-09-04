@@ -1,4 +1,7 @@
-<app-card [backgroundColor]="task.completed ? '#c8fad7' : 'white'">
+<app-card
+  (dblclick)="emitTaskDblClicked()"
+  [backgroundColor]="task.completed ? '#c8fad7' : 'white'"
+>
   <div card-body>
     <div class="d-flex align-center justify-content-between">
       <div class="card-text">

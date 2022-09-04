@@ -9,7 +9,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 })
 export class TaskComponent implements OnInit {
   @Input() task!: Task;
-  @Output() removeTaskButtonClicked = new EventEmitter<string>();
+  @Output() removeTaskButtonClicked = new EventEmitter<Task>();
+  @Output() taskDblClicked = new EventEmitter<Task>();
 
   faTrash = faTrash;
 
@@ -18,6 +19,10 @@ export class TaskComponent implements OnInit {
   ngOnInit(): void {}
 
   emitRemoveTaskButtonClicked(): void {
-    this.removeTaskButtonClicked.emit(this.task.id);
+    this.removeTaskButtonClicked.emit(this.task);
+  }
+
+  emitTaskDblClicked(): void {
+    this.taskDblClicked.emit(this.task);
   }
 }

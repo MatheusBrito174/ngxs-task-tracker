@@ -2,5 +2,6 @@
   <app-task-list
     [tasks]="tasks"
     (removeTaskButtonClicked)="removeTask($event)"
+    (taskDblClicked)="markTaskAsCompleted($event)"
   ></app-task-list>
 </ng-container>

@@ -1,8 +1,7 @@
-import { state } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { TaskActions } from '../actions/task.actions';
-import { Tasks } from '../models/task';
+import { Task, Tasks } from '../models/task';
 import { TaskStateModel } from '../models/task.state.model';
 import { TaskService } from '../services/task.service';
 
@@ -29,9 +28,23 @@ export class TaskState {
     const state = ctx.getState();
     this.taskService
       .addTask(task)
-      .subscribe((newTask) =>
+      .subscribe((newTask: Task) =>
         ctx.patchState({ tasks: [...state.tasks, newTask] })
       );
+  }
+
+  @Action(TaskActions.Edit)
+  edit(ctx: StateContext<TaskStateModel>, action: TaskActions.Edit) {
+    const state = ctx.getState();
+    const { task } = action;
+
+    this.taskService.updateTask(task).subscribe((updatedTask: Task) => {
+      ctx.patchState({
+        tasks: state.tasks.map((task) =>
+          task.id === updatedTask.id ? updatedTask : task
+        ),
+      });
+    });
   }
 
   @Action(TaskActions.Remove)
@@ -50,6 +63,6 @@ export class TaskState {
   fetchAll(ctx: StateContext<TaskStateModel>) {
     this.taskService
       .fetchAllTasks()
-      .subscribe((tasks) => ctx.setState({ tasks }));
+      .subscribe((tasks: Tasks) => ctx.setState({ tasks }));
   }
 }

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { Tasks } from '../../models/task';
+import { Task, Tasks } from '../../models/task';
 
 @Component({
   selector: 'app-task-list',
@@ -8,13 +8,18 @@ import { Tasks } from '../../models/task';
 })
 export class TaskListComponent implements OnInit {
   @Input() tasks!: Tasks;
-  @Output() removeTaskButtonClicked = new EventEmitter<string>();
+  @Output() removeTaskButtonClicked = new EventEmitter<Task>();
+  @Output() taskDblClicked = new EventEmitter<Task>();
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  emitRemoveTaskButtonClicked(taskId: string): void {
-    this.removeTaskButtonClicked.emit(taskId);
+  emitRemoveTaskButtonClicked(task: Task): void {
+    this.removeTaskButtonClicked.emit(task);
+  }
+
+  emitTaskDblClicked(task: Task): void {
+    this.taskDblClicked.emit(task);
   }
 }

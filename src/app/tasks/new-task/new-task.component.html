@@ -1,4 +1,4 @@
-<form [formGroup]="taskForm">
+<div [formGroup]="newTaskForm">
   <div class="form-group mb-3">
     <input
       type="text"
@@ -11,10 +11,10 @@
     <app-validation-error-msg
       *ngIf="
         (
-          taskForm.get('description')?.touched ||
-          taskForm.get('description')?.dirty
+          newTaskForm.get('description')?.touched ||
+          newTaskForm.get('description')?.dirty
         ) &&
-        taskForm.get('description')?.errors?.['required']
+        newTaskForm.get('description')?.errors?.['required']
       "
       message="The field is required."
     >
@@ -23,10 +23,10 @@
     <app-validation-error-msg
       *ngIf="
         (
-          taskForm.get('description')?.touched ||
-          taskForm.get('description')?.dirty
+          newTaskForm.get('description')?.touched ||
+          newTaskForm.get('description')?.dirty
         ) &&
-        taskForm.get('description')?.errors?.['maxlength']
+        newTaskForm.get('description')?.errors?.['maxlength']
       "
       [message]="getMaxLengthErrorMessage('description')"
     >
@@ -44,10 +44,10 @@
     <app-validation-error-msg
       *ngIf="
         (
-          taskForm.get('datetime')?.touched ||
-          taskForm.get('datetime')?.dirty
+          newTaskForm.get('datetime')?.touched ||
+          newTaskForm.get('datetime')?.dirty
         ) &&
-        taskForm.get('datetime')?.errors?.['required']
+        newTaskForm.get('datetime')?.errors?.['required']
       "
       message="The field is required."
     >
@@ -56,10 +56,22 @@
     <app-validation-error-msg
       *ngIf="
         (
-          taskForm.get('datetime')?.touched ||
-          taskForm.get('datetime')?.dirty
+          newTaskForm.get('datetime')?.touched ||
+          newTaskForm.get('datetime')?.dirty
         ) &&
-        taskForm.get('datetime')?.errors?.['minDate']
+        newTaskForm.get('datetime')?.errors?.['date']
+      "
+      message="The field must be a valid date."
+    >
+    </app-validation-error-msg>
+
+    <app-validation-error-msg
+      *ngIf="
+        (
+          newTaskForm.get('datetime')?.touched ||
+          newTaskForm.get('datetime')?.dirty
+        ) &&
+        newTaskForm.get('datetime')?.errors?.['minDate']
       "
       message="The field should be greater than the current date and time."
     >
@@ -73,4 +85,4 @@
       formControlName="completed"
     ></app-checkbox>
   </div>
-</form>
+</div>

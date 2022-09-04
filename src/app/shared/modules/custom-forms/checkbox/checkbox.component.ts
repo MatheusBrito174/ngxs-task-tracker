@@ -32,7 +32,11 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   }
 
   registerOnChange(fn: any): void {
-    this.onChange = fn;
+    this.onChange = (event: Event) => {
+      const checkboxElement = event.target as HTMLInputElement;
+
+      fn(checkboxElement.checked);
+    };
   }
 
   registerOnTouched(fn: any): void {

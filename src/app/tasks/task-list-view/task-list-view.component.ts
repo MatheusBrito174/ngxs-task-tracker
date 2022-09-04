@@ -18,4 +18,8 @@ export class TaskListViewComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(new TaskActions.FetchAll());
   }
+
+  removeTask(taskId: string) {
+    this.store.dispatch(new TaskActions.Remove(taskId));
+  }
 }

@@ -34,6 +34,18 @@ export class TaskState {
       );
   }
 
+  @Action(TaskActions.Remove)
+  remove(ctx: StateContext<TaskStateModel>, action: TaskActions.Remove) {
+    const state = ctx.getState();
+    const { taskId } = action;
+
+    this.taskService.removeTask(taskId).subscribe(() => {
+      ctx.patchState({
+        tasks: state.tasks.filter((task) => task.id !== taskId),
+      });
+    });
+  }
+
   @Action(TaskActions.FetchAll)
   fetchAll(ctx: StateContext<TaskStateModel>) {
     this.taskService

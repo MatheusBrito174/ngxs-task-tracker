@@ -20,6 +20,6 @@ export namespace TaskActions {
   export class Remove {
     static readonly type = '[Task] Remove';
 
-    constructor(public id: string) {}
+    constructor(public taskId: string) {}
   }
 }

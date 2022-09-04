@@ -12,7 +12,12 @@
       </div>
 
       <div class="d-flex flex-column justify-content-center">
-        <app-button format="outline" [rounded]="true" size="sm">
+        <app-button
+          (click)="emitRemoveTaskButtonClicked()"
+          format="outline"
+          [rounded]="true"
+          size="sm"
+        >
           <fa-icon [icon]="faTrash" [styles]="{ color: 'red' }"></fa-icon>
         </app-button>
       </div>

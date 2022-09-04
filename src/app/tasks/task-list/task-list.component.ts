@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Tasks } from '../../models/task';
 
 @Component({
@@ -8,8 +8,13 @@ import { Tasks } from '../../models/task';
 })
 export class TaskListComponent implements OnInit {
   @Input() tasks!: Tasks;
+  @Output() removeTaskButtonClicked = new EventEmitter<string>();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  emitRemoveTaskButtonClicked(taskId: string): void {
+    this.removeTaskButtonClicked.emit(taskId);
+  }
 }

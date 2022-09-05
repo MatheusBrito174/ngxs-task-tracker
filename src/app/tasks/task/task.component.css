@@ -5,3 +5,7 @@
 .task-datetime {
   font-style: italic;
 }
+
+app-card {
+  cursor: pointer;
+}

@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
+import { take } from 'rxjs';
 import { TaskActions } from '../actions/task.actions';
 import { Task, Tasks } from '../models/task';
 import { TaskStateModel } from '../models/task.state.model';
@@ -28,6 +29,7 @@ export class TaskState {
     const state = ctx.getState();
     this.taskService
       .addTask(task)
+      .pipe(take(1))
       .subscribe((newTask: Task) =>
         ctx.patchState({ tasks: [...state.tasks, newTask] })
       );
@@ -38,13 +40,16 @@ export class TaskState {
     const state = ctx.getState();
     const { task } = action;
 
-    this.taskService.updateTask(task).subscribe((updatedTask: Task) => {
-      ctx.patchState({
-        tasks: state.tasks.map((task) =>
-          task.id === updatedTask.id ? updatedTask : task
-        ),
+    this.taskService
+      .updateTask(task)
+      .pipe(take(1))
+      .subscribe((updatedTask: Task) => {
+        ctx.patchState({
+          tasks: state.tasks.map((task) =>
+            task.id === updatedTask.id ? updatedTask : task
+          ),
+        });
       });
-    });
   }
 
   @Action(TaskActions.Remove)
@@ -52,17 +57,21 @@ export class TaskState {
     const state = ctx.getState();
     const { taskId } = action;
 
-    this.taskService.removeTask(taskId).subscribe(() => {
-      ctx.patchState({
-        tasks: state.tasks.filter((task) => task.id !== taskId),
+    this.taskService
+      .removeTask(taskId)
+      .pipe(take(1))
+      .subscribe(() => {
+        ctx.patchState({
+          tasks: state.tasks.filter((task) => task.id !== taskId),
+        });
       });
-    });
   }
 
   @Action(TaskActions.FetchAll)
   fetchAll(ctx: StateContext<TaskStateModel>) {
     this.taskService
       .fetchAllTasks()
+      .pipe(take(1))
       .subscribe((tasks: Tasks) => ctx.setState({ tasks }));
   }
 }

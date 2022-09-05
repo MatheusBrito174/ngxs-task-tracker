@@ -20,7 +20,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   onChange: Function = (value: boolean): void => {};
   onTouched: Function = (): void => {};
 
-  value: boolean = false;
+  checked: boolean = false;
   disabled: boolean = false;
 
   constructor() {}
@@ -28,7 +28,7 @@ export class CheckboxComponent implements OnInit, ControlValueAccessor {
   ngOnInit(): void {}
 
   writeValue(value: any): void {
-    this.value = value;
+    this.checked = value;
   }
 
   registerOnChange(fn: any): void {

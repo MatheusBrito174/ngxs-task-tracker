@@ -1,3 +1,4 @@
+import { NewTaskFormState } from './../states/new-task-form.state';
 import { TaskState } from './../states/task.state';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -26,7 +27,7 @@ import { TaskListViewComponent } from './task-list-view/task-list-view.component
     FontAwesomeModule,
     CustomFormsModule,
     GeneralModule,
-    NgxsModule.forFeature([TaskState]),
+    NgxsModule.forFeature([TaskState, NewTaskFormState]),
   ],
   exports: [
     TaskComponent,

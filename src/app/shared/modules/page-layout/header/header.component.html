@@ -4,8 +4,20 @@
       <fa-icon [icon]="faCalendarCheck"></fa-icon>
       TaskTracker
     </a>
-    <app-button [hidden]="router.url !== '/home'" format="success">
-      Exibir Form
+    <app-button
+      (click)="toggleFormExibition()"
+      [hidden]="!showShowFormButton()"
+      format="success"
+    >
+      Show Form
+    </app-button>
+
+    <app-button
+      (click)="toggleFormExibition()"
+      [hidden]="!showHideFormButton()"
+      format="danger"
+    >
+      Hide Form
     </app-button>
   </div>
 </nav>

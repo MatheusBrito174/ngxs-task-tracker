@@ -1,4 +1,8 @@
-<form [formGroup]="newTaskViewForm" (ngSubmit)="createNewTask()">
+<form
+  [hidden]="!(showNewTaskForm$ | async)"
+  [formGroup]="newTaskViewForm"
+  (ngSubmit)="createNewTask()"
+>
   <app-new-task
     (formGroupCreated)="addFormGroup('newTask', $event)"
   ></app-new-task>

@@ -18,7 +18,7 @@ export class TaskState {
   constructor(private readonly taskService: TaskService) {}
 
   @Selector()
-  static tasks(state: TaskStateModel) {
+  static tasks(state: TaskStateModel): Tasks {
     return state.tasks;
   }
 

@@ -1,7 +1,8 @@
+import { NewTaskFormState } from './../../states/new-task-form.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Store } from '@ngxs/store';
-import { Subscription } from 'rxjs';
+import { Select, Store } from '@ngxs/store';
+import { Subscription, Observable } from 'rxjs';
 import { TaskActions } from 'src/app/actions/task.actions';
 import { Task } from 'src/app/models/task';
 
@@ -12,6 +13,9 @@ import { Task } from 'src/app/models/task';
 })
 export class NewTaskViewComponent implements OnInit, OnDestroy {
   subscription = new Subscription();
+
+  @Select(NewTaskFormState.showNewTaskForm)
+  showNewTaskForm$!: Observable<boolean>;
 
   newTaskViewForm!: FormGroup;
 

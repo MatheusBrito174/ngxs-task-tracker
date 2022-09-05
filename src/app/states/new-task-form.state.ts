@@ -14,7 +14,7 @@ import { NewTaskFormStateModel } from '../models/new-task-form.state.model';
 })
 export class NewTaskFormState {
   @Selector()
-  static showNewTaskForm(state: NewTaskFormStateModel) {
+  static showNewTaskForm(state: NewTaskFormStateModel): boolean {
     return state.showNewTaskForm;
   }
 

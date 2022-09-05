@@ -1,3 +1,5 @@
+import { NewTaskFormState } from './../../../states/new-task-form.state';
+import { NgxsModule } from '@ngxs/store';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +17,7 @@ import { GeneralModule } from '../general/general.module';
     CustomFormsModule,
     FontAwesomeModule,
     GeneralModule,
+    NgxsModule.forFeature([NewTaskFormState]),
   ],
   exports: [HeaderComponent, FooterComponent],
 })

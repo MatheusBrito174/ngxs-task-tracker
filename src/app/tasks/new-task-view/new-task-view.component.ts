@@ -1,3 +1,4 @@
+import { AddTaskPayload } from './../../models/add-task-payload.model';
 import { NewTaskFormState } from './../../states/new-task-form.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -43,10 +44,10 @@ export class NewTaskViewComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const newTask: Task = this.newTaskViewForm.value.newTask;
+    const addTaskPayload = this.newTaskViewForm.value.newTask as AddTaskPayload;
 
     this.subscription.add(
-      this.store.dispatch(new TaskActions.Add(newTask)).subscribe(() => {
+      this.store.dispatch(new TaskActions.Add(addTaskPayload)).subscribe(() => {
         this.newTaskViewForm.reset();
       })
     );

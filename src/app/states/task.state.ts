@@ -25,10 +25,10 @@ export class TaskState {
 
   @Action(TaskActions.Add)
   add(ctx: StateContext<TaskStateModel>, action: TaskActions.Add) {
-    const { task } = action;
+    const { addTaskPayload } = action;
     const state = ctx.getState();
     this.taskService
-      .addTask(task)
+      .addTask(addTaskPayload)
       .pipe(take(1))
       .subscribe((newTask: Task) =>
         ctx.patchState({ tasks: [...state.tasks, newTask] })

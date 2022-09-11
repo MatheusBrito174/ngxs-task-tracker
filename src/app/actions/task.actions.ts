@@ -1,10 +1,11 @@
+import { AddTaskPayload } from '../models/add-task-payload.model';
 import { Task } from './../models/task';
 
 export namespace TaskActions {
   export class Add {
     static readonly type = '[Task] Add';
 
-    constructor(public task: Task) {}
+    constructor(public addTaskPayload: AddTaskPayload) {}
   }
 
   export class Edit {

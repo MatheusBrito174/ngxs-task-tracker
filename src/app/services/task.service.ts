@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Task, Tasks } from '../models/task';
+import { AddTaskPayload } from '../models/add-task-payload.model';
 
 @Injectable({
   providedIn: 'root',
@@ -12,8 +13,8 @@ export class TaskService {
 
   constructor(private readonly http: HttpClient) {}
 
-  addTask(task: Task): Observable<Task> {
-    return this.http.post<Task>(`${this.apiBaseUrl}/tasks`, task);
+  addTask(addTaskPayload: AddTaskPayload): Observable<Task> {
+    return this.http.post<Task>(`${this.apiBaseUrl}/tasks`, addTaskPayload);
   }
 
   fetchAllTasks(): Observable<Tasks> {

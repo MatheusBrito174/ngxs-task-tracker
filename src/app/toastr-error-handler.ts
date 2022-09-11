@@ -18,11 +18,11 @@ export class ToastrErrorHandler implements ErrorHandler {
      * that NGXS always calls EventHandler when error occurs in an
      * action handler.
      */
-    if (error.alreadyTreatedInErrorHandler) {
+    if (error.alreadyHandledInErrorHandler) {
       return;
     }
 
-    error.alreadyTreatedInErrorHandler = true;
+    error.alreadyHandledInErrorHandler = true;
 
     this.toastrService.error(error.message || 'An error occurred.');
 

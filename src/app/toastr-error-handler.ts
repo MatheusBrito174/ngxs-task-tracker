@@ -3,7 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class ToastrErrorHandler implements ErrorHandler {
-  constructor(@Inject(Injector) private readonly injector: Injector) {}
+  constructor(private readonly injector: Injector) {}
 
   /**
    * Need to get ToastrService from injector rather than constructor injection to avoid cyclic dependency error

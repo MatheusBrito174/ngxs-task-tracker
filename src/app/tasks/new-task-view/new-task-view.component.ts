@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
 import { ToastrService } from 'ngx-toastr';
-import { Observable, Subscription } from 'rxjs';
+import { Observable, Subscription, finalize } from 'rxjs';
 import { TaskActions } from 'src/app/actions/task.actions';
 import { AddTaskPayload } from './../../models/add-task-payload.model';
 import { NewTaskFormState } from './../../states/new-task-form.state';
@@ -19,6 +19,7 @@ export class NewTaskViewComponent implements OnInit, OnDestroy {
   showNewTaskForm$!: Observable<boolean>;
 
   newTaskViewForm!: FormGroup;
+  addingTask: boolean = false;
 
   constructor(
     private readonly formBuilder: FormBuilder,
@@ -45,13 +46,18 @@ export class NewTaskViewComponent implements OnInit, OnDestroy {
       return;
     }
 
+    this.addingTask = true;
+
     const addTaskPayload = this.newTaskViewForm.value.newTask as AddTaskPayload;
 
     this.subscription.add(
-      this.store.dispatch(new TaskActions.Add(addTaskPayload)).subscribe(() => {
-        this.newTaskViewForm.reset();
-        this.toastrService.success('Task added.');
-      })
+      this.store
+        .dispatch(new TaskActions.Add(addTaskPayload))
+        .pipe(finalize(() => (this.addingTask = false)))
+        .subscribe(() => {
+          this.newTaskViewForm.reset();
+          this.toastrService.success('Task added.');
+        })
     );
   }
 }

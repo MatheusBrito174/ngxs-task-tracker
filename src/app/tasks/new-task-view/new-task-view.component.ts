@@ -1,11 +1,11 @@
-import { AddTaskPayload } from './../../models/add-task-payload.model';
-import { NewTaskFormState } from './../../states/new-task-form.state';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Select, Store } from '@ngxs/store';
-import { Subscription, Observable } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
+import { Observable, Subscription } from 'rxjs';
 import { TaskActions } from 'src/app/actions/task.actions';
-import { Task } from 'src/app/models/task';
+import { AddTaskPayload } from './../../models/add-task-payload.model';
+import { NewTaskFormState } from './../../states/new-task-form.state';
 
 @Component({
   selector: 'app-new-task-view',
@@ -22,7 +22,8 @@ export class NewTaskViewComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly formBuilder: FormBuilder,
-    private store: Store
+    private readonly store: Store,
+    private readonly toastrService: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +50,7 @@ export class NewTaskViewComponent implements OnInit, OnDestroy {
     this.subscription.add(
       this.store.dispatch(new TaskActions.Add(addTaskPayload)).subscribe(() => {
         this.newTaskViewForm.reset();
+        this.toastrService.success('Task added.');
       })
     );
   }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { take } from 'rxjs';
+import { Observable, take, tap } from 'rxjs';
 import { TaskActions } from '../actions/task.actions';
 import { Task, Tasks } from '../models/task';
 import { TaskStateModel } from '../models/task.state.model';
@@ -24,54 +24,64 @@ export class TaskState {
   }
 
   @Action(TaskActions.Add)
-  add(ctx: StateContext<TaskStateModel>, action: TaskActions.Add) {
+  add(
+    ctx: StateContext<TaskStateModel>,
+    action: TaskActions.Add
+  ): Observable<Task> {
     const { addTaskPayload } = action;
     const state = ctx.getState();
-    this.taskService
-      .addTask(addTaskPayload)
-      .pipe(take(1))
-      .subscribe((newTask: Task) =>
+
+    return this.taskService.addTask(addTaskPayload).pipe(
+      take(1),
+      tap((newTask: Task) =>
         ctx.patchState({ tasks: [...state.tasks, newTask] })
-      );
+      )
+    );
   }
 
   @Action(TaskActions.Edit)
-  edit(ctx: StateContext<TaskStateModel>, action: TaskActions.Edit) {
+  edit(
+    ctx: StateContext<TaskStateModel>,
+    action: TaskActions.Edit
+  ): Observable<Task> {
     const state = ctx.getState();
     const { task } = action;
 
-    this.taskService
-      .updateTask(task)
-      .pipe(take(1))
-      .subscribe((updatedTask: Task) => {
+    return this.taskService.updateTask(task).pipe(
+      take(1),
+      tap((updatedTask: Task) => {
         ctx.patchState({
           tasks: state.tasks.map((task) =>
             task.id === updatedTask.id ? updatedTask : task
           ),
         });
-      });
+      })
+    );
   }
 
   @Action(TaskActions.Remove)
-  remove(ctx: StateContext<TaskStateModel>, action: TaskActions.Remove) {
+  remove(
+    ctx: StateContext<TaskStateModel>,
+    action: TaskActions.Remove
+  ): Observable<{}> {
     const state = ctx.getState();
     const { taskId } = action;
 
-    this.taskService
-      .removeTask(taskId)
-      .pipe(take(1))
-      .subscribe(() => {
+    return this.taskService.removeTask(taskId).pipe(
+      take(1),
+      tap(() => {
         ctx.patchState({
           tasks: state.tasks.filter((task) => task.id !== taskId),
         });
-      });
+      })
+    );
   }
 
   @Action(TaskActions.FetchAll)
-  fetchAll(ctx: StateContext<TaskStateModel>) {
-    this.taskService
-      .fetchAllTasks()
-      .pipe(take(1))
-      .subscribe((tasks: Tasks) => ctx.setState({ tasks }));
+  fetchAll(ctx: StateContext<TaskStateModel>): Observable<Tasks> {
+    return this.taskService.fetchAllTasks().pipe(
+      take(1),
+      tap((tasks: Tasks) => ctx.setState({ tasks }))
+    );
   }
 }
